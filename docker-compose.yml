@@ -1,0 +1,50 @@
+version: '3'
+
+networks:
+  bitnami_boot_net:
+    driver: bridge
+
+services:
+
+  mariadb:
+    image: 'bitnami/mariadb'
+    volumes:
+      - 'v_mariadb_data:/bitnami'
+    environment:
+       MARIADB_USER : db_name
+       MARIADB_DATABASE : db_name
+       MARIADB_PASSWORD : db_name_p
+       MARIADB_ROOT_PASSWORD : db_name_p_root
+    networks:
+      - bitnami_boot_net
+
+  my_ghost:
+    image: 'kmilouh/ghost-blog:latest'
+    ports:
+      - '3300:3300'
+    volumes:
+      - 'v_ghost_data:/var/www/ghost'
+    depends_on:
+      - mariadb
+    environment:
+       DATABASE_HOST : mariadb
+       DATABASE_PORT_NUMBER : 3306
+       DATABASE_USER : db_name
+       DATABASE_PASSWORD : db_name_p
+       DATABASE_NAME : db_name
+       GHOST_URL : http://myghost.net:3300
+       GHOST_HOST : myghost.net
+       GHOST_PORT_NUMBER : 3300
+       GHOST_USER : myuser
+       GHOST_EMAIL : myuser@mail.com
+       GHOST_BLOG_TITLE : "My Blog the best"
+       GHOST_PASSWORD : abcABC12345
+       GHOST_VERSION : 2.16.2
+    networks:
+      - bitnami_boot_net
+
+volumes:
+  v_mariadb_data:
+    driver: local
+  v_ghost_data:
+    driver: local
