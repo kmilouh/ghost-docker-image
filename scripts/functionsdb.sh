@@ -10,6 +10,8 @@ set -o pipefail
 # Load libraries
 # shellcheck source=/dev/null
 . /libbitnami.sh
+# shellcheck source=/dev/null
+. /libfs.sh
 
 ########################
 # Wait for Database
