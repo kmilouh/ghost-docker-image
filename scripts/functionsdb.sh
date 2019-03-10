@@ -39,6 +39,28 @@ waittime() {
     echo "${result}"
 }
 
+###########################
+#
+# Ensure folder permisions 
+#
+###########################
+ensure_disk_write_read() {
+    echo "Ensure DIR Exist"
+
+    for dir in "${GHOST_WWW_DIR}" "${GHOST_APP_DIR}" ; do
+        echo  "Ensure DIR Exist $dir"
+        ensure_dir_exists "$dir"
+    done
+
+    mkdir -p /home/nonroot
+    chown -hR 1001:1001  /home/nonroot
+
+    chmod -R g+rwX "${GHOST_WWW_DIR}" "${GHOST_APP_DIR}"
+    chmod -R 755 "${GHOST_WWW_DIR}"
+    chown -hR 1001:1001  "${GHOST_WWW_DIR}"
+    chown -hR 1001:1001  "${GHOST_APP_DIR}"
+}
+
 # Take from
 # 
 # https://stackoverflow.com/questions/296536/how-to-urlencode-data-for-curl-command/10660730
