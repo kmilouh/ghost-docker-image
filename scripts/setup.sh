@@ -18,7 +18,7 @@ info "** Starting Ghost setup **"
 
 cd "$GHOST_APP_DIR"|| error "Folder not exist : $GHOST_APP_DIR"
 
-if [[ -d "${GHOST_APP_DIR}/content" && ! -L "${GHOST_APP_DIR}/content" ]] ; then
+if [[ -d "${GHOST_APP_DIR}/content/config.development.json" && ! -L "${GHOST_APP_DIR}/content/config.development.json" ]] ; then
     info "Exist old Ghost app"
     #ghost start
 else
