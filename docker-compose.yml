@@ -23,7 +23,7 @@ services:
     ports:
       - '3300:3300'
     volumes:
-      - 'v_ghost_data:/var/www/ghost'
+      - 'v_ghost_data:/bootcam/ghost'
     depends_on:
       - mariadb
     environment:

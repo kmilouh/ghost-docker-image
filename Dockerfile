@@ -35,9 +35,6 @@ ENV GHOST_APP_DIR="/bootcam/ghost/" \
     NODE_ENV=production \
     GHOST_VERSION="2.15.0"
 
-# Volume
-VOLUME $GHOST_APP_DIR
-
 # Create a nonroot user  
 RUN useradd -r -u 1001 -g root nonroot
 
@@ -49,11 +46,14 @@ COPY scripts /
 # Run prepare.sh
 RUN  /prepare.sh
 
+# Set the nonroot active
+USER 1001
+
 # Default etcd ports
 EXPOSE ${GHOST_PORT_NUMBER}  
 
-# Set the nonroot active
-USER 1001
+# Volume
+VOLUME $GHOST_APP_DIR
 
 # Entry Point
 ENTRYPOINT [ "/entrypoint.sh" ]
