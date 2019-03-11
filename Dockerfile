@@ -53,7 +53,7 @@ RUN  /prepare.sh
 EXPOSE ${GHOST_PORT_NUMBER}  
 
 # Set the nonroot active
-USER nonroot
+USER 1001
 
 # Entry Point
 ENTRYPOINT [ "/entrypoint.sh" ]

@@ -22,12 +22,7 @@ if [[ -d "${GHOST_APP_DIR}/content" && ! -L "${GHOST_APP_DIR}/content" ]] ; then
     info "Exist old Ghost app"
     #ghost start
 else
- 
-    ensure_disk_write_read
-    mkdir -p "${GHOST_APP_DIR}/content"
-    chown -hR 1001:1001  "${GHOST_WWW_DIR}"
-    chown -hR 1001:1001  "${GHOST_APP_DIR}/content"
-    
+   
     result=$(waittime 60) 
 
     if [ "$result" -eq "-1" ]; then
